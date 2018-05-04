@@ -257,6 +257,13 @@ func (c check) editCandidacy(tx TxEditCandidacy) error {
 
 func (c check) delegate(tx TxDelegate) error {
 
+	maxDelegatorNum := getMaxDelegatorNum(c.store)
+	maxNum := maxDelegatorNum[tx.PubKey.PubKeyInner.KeyString()]
+	fmt.Println(maxDelegatorNum,tx.Bond.Amount,maxNum)
+	if uint64(tx.Bond.Amount) > maxNum {
+		return fmt.Errorf("cannot delegate to PubKey %v, because  %d bigger than the maxNum %u",
+                    tx.PubKey.PubKeyInner.KeyString(),tx.Bond.Amount,int(maxNum))
+	} 
 	candidate := loadCandidate(c.store, tx.PubKey)
 	if candidate == nil { // does PubKey exist
 		return fmt.Errorf("cannot delegate to non-existant PubKey %v", tx.PubKey)
@@ -265,12 +272,17 @@ func (c check) delegate(tx TxDelegate) error {
 }
 
 func (c check) unbond(tx TxUnbond) error {
-
 	// check if have enough shares to unbond
 	bond := loadDelegatorBond(c.store, c.sender, tx.PubKey)
 	if bond.Shares < tx.Shares {
 		return fmt.Errorf("not enough bond shares to unbond, have %v, trying to unbond %v",
 			bond.Shares, tx.Shares)
+	}
+
+	maxUnbondNum := getMaxUnbondNum(c.store,tx.PubKey.KeyString())
+	if tx.Shares > uint64(maxUnbondNum) {
+		return fmt.Errorf("can't unbond , because %v is more than the max unbond %d",
+			bond.Shares, maxUnbondNum)
 	}
 	return nil
 }

@@ -236,3 +236,40 @@ func saveParams(store state.SimpleDB, params Params) {
 	b := wire.BinaryBytes(params)
 	store.Set(ParamKey, b)
 }
+func getMaxDelegatorNum(store state.SimpleDB) map[string]uint64 {
+	var maxDelegator map[string]uint64
+	maxDelegator = make(map[string]uint64)
+	var sum int = 0
+	for _, candidate := range loadCandidates(store) {
+		sum = sum + int(candidate.Shares)
+		maxDelegator[candidate.PubKey.KeyString()] = candidate.Shares
+		//query.OutputProof(candidate, height)
+	}
+	for k,v := range maxDelegator{
+		var mid int = (sum-int(v*3))/2
+		if mid<0{
+			mid = 0
+		}
+		maxDelegator[k]= uint64(mid)
+		fmt.Println(k,v,mid)
+	}
+	fmt.Println(maxDelegator)
+	return maxDelegator
+}
+
+func getMaxUnbondNum(store state.SimpleDB,pubkey string) int64 {
+	var sum int64 = 0
+	var max int64 = 0
+	for _, candidater := range loadCandidates(store) {
+		share := int64(candidater.Shares)
+		sum = sum + share
+		if max < share && candidater.PubKey.KeyString() != pubkey{
+			max = share
+		}
+	}
+    maxUnbondNum := sum - 3*max
+    if maxUnbondNum<0{
+    	return 0
+	}
+	return maxUnbondNum
+}
