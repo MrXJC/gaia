@@ -3,7 +3,7 @@ package stake
 import (
 	crypto "github.com/tendermint/go-crypto"
 	"github.com/tendermint/go-wire"
-
+        "fmt"
 	sdk "github.com/cosmos/cosmos-sdk"
 	"github.com/cosmos/cosmos-sdk/state"
 )
