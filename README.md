@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/cosmos/gaia/tree/master.svg?style=svg)](https://circleci.com/gh/cosmos/gaia/tree/master)
+[![CircleCI](https://circleci.com/gh/MrXJC/gaia/tree/master.svg?style=svg)](https://circleci.com/gh/MrXJC/gaia/tree/master)
 
 # Cosmos-Hub Staking Module
 
@@ -13,8 +13,8 @@ delegation, validator rewards, unbonding wait period.
 
 ## Installation
 ```
-go get github.com/cosmos/gaia 
-cd $GOPATH/src/github.com/cosmos/gaia
+go get github.com/MrXJC/gaia
+cd $GOPATH/src/github.com/MrXJC/gaia
 make all
 ```
 

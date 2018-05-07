@@ -14,8 +14,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/modules/coin"
 	"github.com/cosmos/cosmos-sdk/stack"
 
-	"github.com/cosmos/gaia/modules/stake"
-	scmds "github.com/cosmos/gaia/modules/stake/commands"
+	"github.com/MrXJC/gaia/modules/stake"
+	scmds "github.com/MrXJC/gaia/modules/stake/commands"
 
 	crypto "github.com/tendermint/go-crypto"
 )

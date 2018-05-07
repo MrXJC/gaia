@@ -35,9 +35,9 @@ The `gaia` tool contains everything required to get started without the UI.
 Install `gaia` as follows:
 
 ```
-mkdir -p $GOPATH/src/github.com/cosmos/gaia
-git clone https://github.com/cosmos/gaia $GOPATH/src/github.com/cosmos/gaia
-cd $GOPATH/src/github.com/cosmos/gaia
+mkdir -p $GOPATH/src/github.com/MrXJC/gaia
+git clone https://github.com/MrXJC/gaia $GOPATH/src/github.com/MrXJC/gaia
+cd $GOPATH/src/github.com/MrXJC/gaia
 make all
 ```
 
